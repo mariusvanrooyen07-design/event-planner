@@ -11,6 +11,7 @@ import Help from './pages/Help.jsx';
 import Register from './pages/Register.jsx';
 import Login from './pages/Login.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+import { EventProvider } from './context/EventContext.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
 
 const router = createBrowserRouter([
@@ -35,7 +36,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <EventProvider>
+        <RouterProvider router={router} />
+      </EventProvider>
     </AuthProvider>
   </StrictMode>,
 )
