@@ -1,7 +1,13 @@
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext.jsx";
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 
 export default function Header() {
+
+  const { currentUser, logout } = useContext(AuthContext);
+
+
   return(
     <Navbar bg="primary" data-bs-theme="dark" expand="md" fixed="top">
       <Container>
@@ -12,6 +18,19 @@ export default function Header() {
             <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
             <Nav.Link as={Link} to="/add-event">Add Event</Nav.Link>
             <Nav.Link as={Link} to="/help">Help</Nav.Link>
+          </Nav>
+          <Nav>
+            {currentUser ?(
+              <>
+                <Navbar.Text className="me-2">{currentUser.username}</Navbar.Text>
+                <Button variant="outline-light" onClick={logout}>Logout</Button>
+              </>
+            ) : (
+              <>
+                <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                <Nav.Link as={Link} to="/register">Register</Nav.Link>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

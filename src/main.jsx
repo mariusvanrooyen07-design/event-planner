@@ -9,6 +9,8 @@ import Dashboard from './pages/Dashboard.jsx';
 import AddEvent from './pages/AddEvent.jsx';
 import Help from './pages/Help.jsx';
 import Register from './pages/Register.jsx';
+import Login from './pages/Login.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
 
 const router = createBrowserRouter([
@@ -16,10 +18,16 @@ const router = createBrowserRouter([
     path: '/',
     element: <Layout />,
     children: [ 
-      { path: 'dashboard', element: <Dashboard />},
-      { path: 'add-event', element: <AddEvent />},
+      { path: 'register', element: <Register /> },
+      { path: 'login', element: <Login /> },
       { path: 'help', element: <Help />},
-      { path: 'register', element: <Register /> }
+      { 
+        element: <ProtectedRoute />,
+        children: [
+          { path: 'dashboard', element: <Dashboard />},
+          { path: 'add-event', element: <AddEvent />},
+        ],
+      }, 
     ],
   },
 ]);
