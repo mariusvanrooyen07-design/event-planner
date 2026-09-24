@@ -1,43 +1,31 @@
 import { useFormik } from "formik";
 import { Card, Col, Row, Form, Button } from "react-bootstrap";
 
-export default function EventForm({ onSubmit }) {
+export default function EventForm({ event, onSubmit }) {
 
   const validate = values => {
     const errors = {};
-
-    if (!values.name) {
-      errors.name = 'Required';
-    }
-    if (!values.date) {
-      errors.date = 'Required';
-    }
-    if (!values.time) {
-      errors.time = 'Required';
-    }
-    if (!values.description) {
-      errors.description = 'Required';
-    }
-    if (!values.location) {
-      errors.location = 'Required';
-    }
-
+    if (!values.name) errors.name = 'Required';
+    if (!values.description) errors.description = 'Required';
+    if (!values.location) errors.location = 'Required';
+    if (!values.date) errors.date = 'Required';
+    if (!values.time) errors.time = 'Required';
     return errors;
-  }
+  };
 
   const formik = useFormik({
-    initialValues: {
-      name: '',
-      date: '',
-      time: '',
-      description: '',
-      location: '',
-    },
-    validate,
-    onSubmit: (values) => {
-      onSubmit(values.name, values.date, values.time, values.description, values.location);
-    },
-  });
+        initialValues: {
+        name: event?.name || '',
+        description: event?.description ||  '',
+        location: event?.location ||  '',
+        date: event?.date ||  '',
+        time: event?.time ||  '',
+      },
+      validate,
+      onSubmit: (values) => {
+        onSubmit(values.name, values.description, values.location, values.date, values.time);
+      },
+    });
 
   return (
     <>
@@ -45,7 +33,7 @@ export default function EventForm({ onSubmit }) {
         <Card.Body>
           <Form onSubmit={formik.handleSubmit}>
             <Form.Label className="text-uppercase">
-              Add event form:
+              {event ? 'Edit event form:' : 'Add event form:'}
             </Form.Label>
             <Row className="justify-content-center">
               <Col md={6}>
@@ -63,6 +51,34 @@ export default function EventForm({ onSubmit }) {
                   ) : null}
                 </Form.Group>
                 
+                  <Form.Group className="mb-3">
+                    <Form.Control
+                      name="description"
+                      type="text"
+                      placeholder="Event description"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.description}
+                    />
+                    {formik.touched.description && formik.errors.description ? (
+                      <Form.Text className="text-danger">{formik.errors.description}</Form.Text>
+                    ) : null}
+                  </Form.Group>
+
+                  <Form.Group className="mb-3">
+                    <Form.Control
+                      name="location"
+                      type="text"
+                      placeholder="Event location"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.location}
+                    />
+                    {formik.touched.location && formik.errors.location ? (
+                      <Form.Text className="text-danger">{formik.errors.location}</Form.Text>
+                    ) : null}
+                  </Form.Group>
+
                 <Form.Group className="mb-3">
                   <Form.Control
                     name="date"
@@ -90,48 +106,19 @@ export default function EventForm({ onSubmit }) {
                     <Form.Text className="text-danger">{formik.errors.time}</Form.Text>
                   ) : null}
                 </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Control
-                    name="description"
-                    type="text"
-                    placeholder="Event description"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.description}
-                  />
-                  {formik.touched.description && formik.errors.description ? (
-                    <Form.Text className="text-danger">{formik.errors.description}</Form.Text>
-                  ) : null}
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Control
-                    name="location"
-                    type="text"
-                    placeholder="Event location"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.location}
-                  />
-                  {formik.touched.location && formik.errors.location ? (
-                    <Form.Text className="text-danger">{formik.errors.location}</Form.Text>
-                  ) : null}
-                </Form.Group>
                       
                 <Button
                   variant="primary"
                   type="submit"
                 >
-                  <i className="bi bi-calendar-plus me-2"></i>
-                  Add Event
+                  <i className={`bi ${event ? 'bi-pencil-square' : 'bi-calendar-plus'} me-2`}></i>
+                  {event ? 'Update Event' : 'Add Event'}
                 </Button>
               </Col>  
             </Row>
           </Form>
         </Card.Body>
       </Card>
-    </>
-        
+    </>    
   );
 }

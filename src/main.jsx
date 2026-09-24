@@ -12,6 +12,7 @@ import Register from './pages/Register.jsx';
 import Login from './pages/Login.jsx';
 import EventCard from './components/EventCard.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+import EditEvent from './pages/EditEvent.jsx';
 import { EventProvider } from './context/EventContext.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
 
@@ -22,12 +23,13 @@ const router = createBrowserRouter([
     children: [ 
       { path: 'register', element: <Register /> },
       { path: 'login', element: <Login /> },
-      { path: 'help', element: <Help />},
+      { path: 'help', element: <Help /> },
       { 
         element: <ProtectedRoute />,
         children: [
-          { path: 'dashboard', element: <Dashboard />},
-          { path: 'add-event', element: <AddEvent />},
+          { path: 'dashboard', element: <Dashboard /> },
+          { path: 'add-event', element: <AddEvent /> },
+          { path: 'edit-event/:id', element: <EditEvent /> },
         ],
       }, 
     ],

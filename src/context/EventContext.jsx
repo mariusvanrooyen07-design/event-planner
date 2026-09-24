@@ -8,10 +8,10 @@ export const EventProvider = ({ children }) => {
   const [events, setEvents] = useState(loadFromStorage('events', []));
   const { currentUser } = useContext(AuthContext);
 
-  function addEvent(name, date, time, description, location) {
+  function addEvent(name, description, location, date, time) {
     const id = `e_${Date.now()}`;
     const userId = currentUser.id;
-    const newEvent = { id, userId, name, date, time, description, location };
+    const newEvent = { id, userId, name, description, location, date, time };
     const updatedEvents = [...events, newEvent];
     setEvents(updatedEvents);
     saveToStorage('events', updatedEvents);
