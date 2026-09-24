@@ -7,8 +7,8 @@ export default function AddEvent() {
   const { addEvent } = useContext(EventContext);
   const navigate = useNavigate();
   
-  function handleEventAdd(name, date, time, description, location) {
-    addEvent(name, date, time, description, location);
+  function handleEventAdd(name, description, location, date, time) {
+    addEvent(name, description, location, date, time);
     navigate('/dashboard');
   }
 
