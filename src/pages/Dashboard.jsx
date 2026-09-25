@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { EventContext } from '../context/EventContext.jsx';
 import EventCard from '../components/EventCard.jsx';
-import { Col, Row } from "react-bootstrap";
+import { Container, Col, Row } from "react-bootstrap";
 
 export default function Dashboard() {
   
@@ -17,22 +17,27 @@ export default function Dashboard() {
 
   return(
     <>
-      <Row className="g-2 m-3">
+      <Container className="bg-info-subtle border rounded p-3 mb-4">
         <h4>Upcoming events</h4>
-        {upcomingEvents.map((event) => (
-          <Col xs={12} md={6} lg={4} xl={3} key={event.id}>
-            <EventCard event={event} />
-          </Col>
+        <Row className="g-2">
+          {upcomingEvents.map((event) => (
+            <Col xs={12} md={6} lg={4} xl={3} key={event.id}>
+              <EventCard event={event} />
+            </Col>
           ))}
-      </Row>
-      <Row className="g-2 m-3">
+        </Row>
+      </Container>
+      
+      <Container className="bg-secondary-subtle border rounded p-3 mb-4">
         <h4>Past events</h4>
-        {pastEvents.map((event) => (
-          <Col xs={12} md={6} lg={4} xl={3} key={event.id}>
-            <EventCard event={event} />
-          </Col>
-        ))}
-      </Row> 
+        <Row className="g-2">
+          {pastEvents.map((event) => (
+            <Col xs={12} md={6} lg={4} xl={3} key={event.id}>
+              <EventCard event={event} />
+            </Col>
+          ))}
+        </Row>
+      </Container>
     </>    
   );
 }
