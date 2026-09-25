@@ -9,7 +9,7 @@ export default function Header() {
 
 
   return(
-    <Navbar bg="primary" data-bs-theme="dark" expand="md" fixed="top">
+    <Navbar bg="dark" data-bs-theme="dark" expand="md" fixed="top">
       <Container>
         <Navbar.Brand as={Link} to="/dashboard">Event-planner</Navbar.Brand>
         <Navbar.Toggle aria-controls="main-nav" />

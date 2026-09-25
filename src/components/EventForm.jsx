@@ -29,7 +29,7 @@ export default function EventForm({ event, onSubmit }) {
 
   return (
     <>
-      <Card className="mt-4 mb-4 text-center justify-content-center">
+      <Card className="mt-4 mb-4 text-center justify-content-center bg-info-subtle">
         <Card.Body>
           <Form onSubmit={formik.handleSubmit}>
             <Form.Label className="text-uppercase">
