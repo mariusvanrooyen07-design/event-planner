@@ -2,7 +2,6 @@ import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { Card, Col, Row, Form, Button } from "react-bootstrap";
-import Header from "../components/Header.jsx";
 import { AuthContext } from "../context/AuthContext.jsx";
 
 export default function Login() {
@@ -43,7 +42,6 @@ export default function Login() {
     
     return (
       <div>
-        <Header />
         <Card className="mt-4 mb-4 text-center justify-content-center">
           <Card.Body>
             <Form onSubmit={formik.handleSubmit}>

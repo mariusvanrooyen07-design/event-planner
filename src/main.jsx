@@ -10,7 +10,6 @@ import AddEvent from './pages/AddEvent.jsx';
 import Help from './pages/Help.jsx';
 import Register from './pages/Register.jsx';
 import Login from './pages/Login.jsx';
-import EventCard from './components/EventCard.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import EditEvent from './pages/EditEvent.jsx';
 import { EventProvider } from './context/EventContext.jsx';
