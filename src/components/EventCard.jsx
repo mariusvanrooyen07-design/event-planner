@@ -7,6 +7,13 @@ export default function EventCard({ event }) {
   
   const { deleteEvent } = useContext(EventContext);
   
+  function handleDelete() {
+    const confirmed = window.confirm(`Delete "${event.name}"? This cannot be undone.`);
+    if (confirmed) {
+      deleteEvent(event.id);
+    }
+  }
+
   return(
     <Card className="h-100">
       <Card.Body>
@@ -47,7 +54,7 @@ export default function EventCard({ event }) {
           <Col xs={12} md={12} lg={12} xl={12} className="mb-2">
             <Button
               variant="danger"
-              onClick={() => deleteEvent(event.id)}
+              onClick={handleDelete}
             >
             <i className="bi bi-trash me-1"></i>
             Delete Event
