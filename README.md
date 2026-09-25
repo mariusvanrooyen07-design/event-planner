@@ -1,16 +1,76 @@
-# React + Vite
+# Event Planner
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A personal event planner built as a HyperionDev capstone project. Register an account,
+log in, and manage your own events — add, edit, and delete them from a dashboard split
+into upcoming and past events.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Accounts** — register with a name, email, username, and password (validated with
+  Formik: no empty fields, a valid email format, and a password with 8+ characters
+  including an uppercase letter, a lowercase letter, a number, and a special character).
+  Duplicate usernames/emails are rejected.
+- **Login / logout** — log in with your username and password. Protected pages
+  (Dashboard, Add Event, editing an event) redirect to Login if you're not signed in.
+- **Dashboard** — your events, split into Upcoming and Past sections, sorted by date,
+  rendered with `array.map()`.
+- **Event management** — add, edit, or delete events (name, date, time, description,
+  location). Changes update the dashboard immediately.
+- **Fixed navigation header** — always visible, with links to Dashboard, Add Event, and
+  Help, plus Login/Register or your username and a Logout button depending on whether
+  you're signed in.
+- **Help page** — a collapsible guide covering navigation, registration, and managing
+  events.
+- **Responsive design** — built with React Bootstrap; the navigation collapses into a
+  menu on narrower screens, and the event grid adapts from one column up to four.
 
-## React Compiler
+Data (accounts and events) is stored in the browser's `localStorage`, so it persists
+between visits without needing a backend. Note that, as with any app storing data this
+way, passwords are kept in plain text — fine for a portfolio demo, but never do this in
+a real application.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech stack
 
-## Expanding the Oxlint configuration
+- [React](https://react.dev/) (via [Vite](https://vitejs.dev/))
+- [React Router](https://reactrouter.com/) for navigation and protected routes
+- [Formik](https://formik.org/) for form state and validation
+- [React Bootstrap](https://react-bootstrap.github.io/) for UI components
+- [Bootstrap Icons](https://icons.getbootstrap.com/) for icons
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Getting started
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+Then open the local URL shown in the terminal (usually `http://localhost:5173`).
+
+## Project structure
+
+```
+src/
+  context/
+    AuthContext.jsx    — user accounts, login state, persisted to localStorage
+    EventContext.jsx   — events for the current user, persisted to localStorage
+  components/
+    Layout.jsx          — fixed header + page content
+    Header.jsx           — navigation bar
+    ProtectedRoute.jsx   — redirects to Login if not signed in
+    EventCard.jsx        — displays one event, with Edit/Delete actions
+    EventForm.jsx         — shared form for adding and editing events
+  pages/
+    Register.jsx, Login.jsx
+    Dashboard.jsx
+    AddEvent.jsx, EditEvent.jsx
+    Help.jsx
+  utils/
+    storage.js          — localStorage helpers
+```
