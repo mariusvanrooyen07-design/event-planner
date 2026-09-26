@@ -14,8 +14,8 @@ into upcoming and past events.
   (Dashboard, Add Event, editing an event) redirect to Login if you're not signed in.
 - **Dashboard** — your events, split into Upcoming and Past sections, sorted by date,
   rendered with `array.map()`.
-- **Event management** — add, edit, or delete events (name, date, time, description,
-  location). Changes update the dashboard immediately.
+- **Event management** — add, edit, or delete events (name, description,location, date,
+  time, ). Changes update the dashboard immediately.
 - **Fixed navigation header** — always visible, with links to Dashboard, Add Event, and
   Help, plus Login/Register or your username and a Logout button depending on whether
   you're signed in.
@@ -26,8 +26,21 @@ into upcoming and past events.
 
 Data (accounts and events) is stored in the browser's `localStorage`, so it persists
 between visits without needing a backend. Note that, as with any app storing data this
-way, passwords are kept in plain text — fine for a portfolio demo, but never do this in
-a real application.
+way, passwords are kept in plain text — fine for a portfolio demo, but must never be
+done this way in a real application.
+
+## Screenshots
+![Dashboard](src/assets/dashboard.jpg)
+
+![Add Event](src/assets/add_event.jpg)
+
+![Edit Event](src/assets/edit_event.jpg)
+
+![Delete Event](src/assets/delete_event.jpg)
+
+![Register page](src/assets/register_page.jpg)
+
+![Login page](src/assets/login_page.jpg)
 
 ## Tech stack
 
@@ -53,10 +66,19 @@ npm run dev
 
 Then open the local URL shown in the terminal (usually `http://localhost:5173`).
 
+## Running tests
+
+```bash
+npm run test
+```
+
+Runs the unit tests (`storage.js`) and a snapshot test (`Help.jsx`) with Vitest.
+
 ## Project structure
 
 ```
 src/
+  assets/              — screenshots used in this README and the Help page
   context/
     AuthContext.jsx    — user accounts, login state, persisted to localStorage
     EventContext.jsx   — events for the current user, persisted to localStorage
@@ -70,7 +92,7 @@ src/
     Register.jsx, Login.jsx
     Dashboard.jsx
     AddEvent.jsx, EditEvent.jsx
-    Help.jsx
+    Help.jsx, Help.test.jsx
   utils/
-    storage.js          — localStorage helpers
+    storage.js, storage.test.js
 ```
