@@ -11,7 +11,9 @@ export default function Header() {
   return(
     <Navbar bg="dark" data-bs-theme="dark" expand="md" fixed="top">
       <Container>
-        <Navbar.Brand as={Link} to="/dashboard">Event-planner</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/dashboard">
+          <i class="bi bi-calendar3 me-2"></i>
+          Event Planner</Navbar.Brand>
         <Navbar.Toggle aria-controls="main-nav" />
         <Navbar.Collapse id="main-nav">
           <Nav className="me-auto">
