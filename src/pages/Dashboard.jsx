@@ -7,13 +7,20 @@ export default function Dashboard() {
   
   const { events } = useContext(EventContext);
 
-  const now = new Date();
+  function getLocalDateString(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
 
-  const upcomingEvents = events.filter(event => new Date(event.date) >= now);
-  upcomingEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+const today = getLocalDateString(new Date());
 
-  const pastEvents = events.filter(event => new Date(event.date) < now);
-  pastEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+const upcomingEvents = events.filter(event => event.date >= today);
+upcomingEvents.sort((a, b) => a.date.localeCompare(b.date));
+
+const pastEvents = events.filter(event => event.date < today);
+pastEvents.sort((a, b) => a.date.localeCompare(b.date));
 
   return(
     <>
