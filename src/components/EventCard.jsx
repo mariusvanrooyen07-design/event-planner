@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import { Card, Button, Col, Row } from 'react-bootstrap';
 import { EventContext } from '../context/EventContext.jsx';
 
+// The EventCard sets out the card element used to display the events on screen.
 export default function EventCard({ event }) {
-  
+  // Get the deleteEvent function from EventContext.
   const { deleteEvent } = useContext(EventContext);
   
+  // The handleDelete function first asks the user to confirm that the event must be deleted.
+  // When the confirmation is given, the event is deleted.
   function handleDelete() {
     const confirmed = window.confirm(`Delete "${event.name}"? This cannot be undone.`);
     if (confirmed) {
@@ -14,6 +17,7 @@ export default function EventCard({ event }) {
     }
   }
 
+  // Returns the card element that will be used to display events on screen.
   return(
     <Card className="h-100">
       <Card.Body>
@@ -38,8 +42,7 @@ export default function EventCard({ event }) {
         <Card.Text>
           {`Time: ${event.time}`}
         </Card.Text>
-        
-        
+         
         <Row>
           <Col xs={12} md={12} lg={12} xl={12} className="mb-2">
             <Button

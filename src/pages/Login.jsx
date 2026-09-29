@@ -10,6 +10,8 @@ export default function Login() {
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState('');
 
+  // The validate function is used to set error messages for form fields that are required.
+  // It returns an error field for formik.
   const validate = values => {
       const errors = {};
 
@@ -24,12 +26,16 @@ export default function Login() {
       return errors;
     }
     
+    // The formik function is used to set the initial values of the login forms.
     const formik = useFormik({
       initialValues: {
         username: '',
         password: '',
       },
       validate,
+      // The onSubmit function calls the login function and stores the status in loginStatus.
+      // If loginStatus is true the user is navigated to the dashboard.
+      // If loginStatus is false, an error message is displayed.
       onSubmit: (values) => {
         const loginStatus = login(values.username, values.password);
         if (loginStatus) {
