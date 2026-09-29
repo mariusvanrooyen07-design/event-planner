@@ -9,38 +9,46 @@ export default function Register() {
   const { users, register } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  // The validate function is used to set error messages for form fields that are required.
+  // It returns an error field for formik.
   const validate = values => {
       const errors = {};
 
+      // This validation makes sure that the name field is not blank and not longer than 15 char.
       if (!values.name) {
         errors.name = 'Required';
       } else if (values.name.length > 15) {
        errors.name = 'Must be 15 characters or less.';
       }
       
+      // This validation makes sure that the email field is not blank and a valid email address.
       if (!values.email) {
         errors.email = 'Required';
       } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
        errors.email = 'Invalid email address';
       }
-  
+      
+      // Initialise the password requirements
       const hasUppercase = /[A-Z]/.test(values.password);
       const hasLowercase = /[a-z]/.test(values.password);
       const hasNumber = /[0-9]/.test(values.password);
       const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(values.password);
 
+      // This validation makes sure that the password field is not blank and meets the above requirements.
       if (values.password.length < 8) {
         errors.password = 'Password must be at least 8 characters.';
       } else if (!hasUppercase || !hasLowercase || !hasNumber || !hasSpecialChar) {
         errors.password = 'Password must include an uppercase letter, a lowercase letter, a number, and a special character.';
       }
 
+      // This validation makes sure that the username field is not blank and not longer than 20 char.
       if (!values.username) {
         errors.username = 'Required';
       } else if (values.username.length > 20) {
        errors.username = 'Must be 20 characters or less.';
       }
       
+      // This validation makes sure that the username field is filled with a unique username.
       const usernameFound = users.find(
         (user) => user.username === values.username
       );
@@ -48,6 +56,7 @@ export default function Register() {
         errors.username = 'The username is already used. Please enter a new username.'
       }
 
+      // This validation makes sure that the email field is filled with a unique email address.
       const emailFound = users.find(
         (user) => user.email === values.email
       );
@@ -58,6 +67,7 @@ export default function Register() {
       return errors;
     }
     
+    // The formik function is used to set the initial values of the register forms.
     const formik = useFormik({
       initialValues: {
         name: '',
@@ -66,6 +76,8 @@ export default function Register() {
         password: '',
       },
       validate,
+      // The onSubmit function calls the register function that stores the new users information.
+      // It then navigates the user to the login page.
       onSubmit: (values) => {
         register(values.name, values.email, values.username, values.password);
         navigate('/login');

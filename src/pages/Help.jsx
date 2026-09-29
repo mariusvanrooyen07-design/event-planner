@@ -8,6 +8,7 @@ import addEvent from '../assets/add_event.jpg';
 import editEvent from '../assets/edit_event.jpg';
 import deleteEvent from '../assets/delete_event.jpg';
 
+// The Help function renders the help page.
 export default function Help() {
   return(
     <Accordion defaultActiveKey="0">

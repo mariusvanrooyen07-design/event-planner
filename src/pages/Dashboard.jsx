@@ -7,6 +7,8 @@ export default function Dashboard() {
   
   const { events } = useContext(EventContext);
 
+  // The getLocalDateString function is used to build the date string manually,
+  // to avoid the UTC-midnight timezone bug.
   function getLocalDateString(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -16,6 +18,7 @@ export default function Dashboard() {
 
 const today = getLocalDateString(new Date());
 
+// The following functions are used to sort the events into upcoming and past events.
 const upcomingEvents = events.filter(event => event.date >= today);
 upcomingEvents.sort((a, b) => a.date.localeCompare(b.date));
 
